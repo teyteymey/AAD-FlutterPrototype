@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
 
 var partyInfo = [
-  ['title1', 'location1', 'date1', '1.jpg'],
-  ['title2', 'location2', 'date2', '2.jpg'],
-  ['title3', 'location3', 'date3', '3.jpg']
+  ['House Party', 'Deventer', '20 Feb, 20:00h', '2.jpg'],
+  ['Disco', 'Deventer', '20 Feb, 20:00h', '3.jpg'],
+  ['Costume Party', 'Den Heks, Deventer', '15 Feb, 17:00h', '1.jpg'],
 ];
 
 void main() {
   runApp(
     MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Upcoming parties'),
-            backgroundColor: Colors.lime,
+        appBar: AppBar(
+          title: const Text('Upcoming parties'),
+          backgroundColor: Color.fromARGB(255, 252, 85, 19),
+        ),
+        body: Container(
+          color: Color.fromARGB(228, 249, 245, 227),
+          child: Column(
+            children: [for (var i in partyInfo) Party(i)],
           ),
-          body: Container(
-            child: Column(
-              children: [for (var i in partyInfo) Party(i)],
-            ),
-          )),
+        ),
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: Color.fromARGB(255, 252, 85, 19),
+            child: const Icon(Icons.add),
+            onPressed: () {
+              //redirect to new view
+            }),
+      ),
     ),
   );
 }
@@ -45,10 +53,23 @@ class Party extends StatelessWidget {
       onPressed: () {},
       child: Card(
         child: ListTile(
-          //leading: Image.asset(imageParty),
+          tileColor: Color.fromARGB(129, 68, 228, 175),
           leading: Image(image: AssetImage("images/" + imageParty)),
-          title: Text(titleParty),
-          subtitle: Text(locationParty + ', ' + dateParty),
+          title: Text(titleParty,
+              style: const TextStyle(
+                fontFamily: 'JosefinSans',
+                fontWeight: FontWeight.w900,
+                fontSize: 20.0,
+              )),
+          subtitle: Text(
+            locationParty + '\n' + dateParty,
+            style: const TextStyle(
+                fontFamily: 'JosefinSans',
+                fontWeight: FontWeight.w500,
+                fontSize: 15.0,
+                color: Colors.black),
+          ),
+          isThreeLine: true,
         ),
       ),
     );
