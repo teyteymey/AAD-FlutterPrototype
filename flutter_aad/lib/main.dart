@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 var partyInfo = [
-  ['title1', 'location1', 'date1'],
-  ['title2', 'location2', 'date2']
+  ['title1', 'location1', 'date1', '1.jpg'],
+  ['title2', 'location2', 'date2', '2.jpg'],
+  ['title3', 'location3', 'date3', '3.jpg']
 ];
 
 void main() {
@@ -28,12 +29,14 @@ class Party extends StatelessWidget {
   String titleParty = 'Default';
   String locationParty = 'Default';
   String dateParty = 'Default';
+  String imageParty = "1.jpg";
 
   //creator methods with parameters
   Party(List<String> list) {
     titleParty = list[0];
     locationParty = list[1];
     dateParty = list[2];
+    imageParty = list[3];
   }
 
   @override
@@ -42,6 +45,8 @@ class Party extends StatelessWidget {
       onPressed: () {},
       child: Card(
         child: ListTile(
+          //leading: Image.asset(imageParty),
+          leading: Image(image: AssetImage("images/" + imageParty)),
           title: Text(titleParty),
           subtitle: Text(locationParty + ', ' + dateParty),
         ),
