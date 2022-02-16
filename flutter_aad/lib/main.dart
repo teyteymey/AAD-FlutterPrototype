@@ -24,7 +24,7 @@ void main() {
             backgroundColor: Color.fromARGB(255, 252, 85, 19),
             child: const Icon(Icons.add),
             onPressed: () {
-              //redirect to new view
+              PartyDetails();
             }),
       ),
     ),
@@ -52,8 +52,10 @@ class Party extends StatelessWidget {
     return TextButton(
       onPressed: () {},
       child: Card(
+        color: Color.fromARGB(255, 146, 255, 219),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: ListTile(
-          tileColor: Color.fromARGB(129, 68, 228, 175),
           leading: Image(image: AssetImage("images/" + imageParty)),
           title: Text(titleParty,
               style: const TextStyle(
@@ -70,6 +72,25 @@ class Party extends StatelessWidget {
                 color: Colors.black),
           ),
           isThreeLine: true,
+        ),
+      ),
+    );
+  }
+}
+
+class PartyDetails extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Detail page of party!'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Go back!'),
         ),
       ),
     );
