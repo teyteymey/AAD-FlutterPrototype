@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 var partyInfo = [
@@ -15,7 +13,11 @@ void main() {
             title: const Text('Upcoming parties'),
             backgroundColor: Colors.lime,
           ),
-          body: Party(partyInfo[0][0])),
+          body: Container(
+            child: Column(
+              children: [for (var i in partyInfo) Party(i)],
+            ),
+          )),
     ),
   );
 }
@@ -23,18 +25,26 @@ void main() {
 // Definition of class party
 class Party extends StatelessWidget {
   //attributes of each party
-  String partyTitle = 'Default';
+  String titleParty = 'Default';
+  String locationParty = 'Default';
+  String dateParty = 'Default';
 
   //creator methods with parameters
-  Party(String title) {
-    this.partyTitle = title;
+  Party(List<String> list) {
+    titleParty = list[0];
+    locationParty = list[1];
+    dateParty = list[2];
   }
 
+  @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {},
       child: Card(
-        child: ListTile(title: Text(partyTitle)),
+        child: ListTile(
+          title: Text(titleParty),
+          subtitle: Text(locationParty + ', ' + dateParty),
+        ),
       ),
     );
   }
