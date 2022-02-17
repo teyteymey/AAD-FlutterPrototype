@@ -1,5 +1,6 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
+import 'contacts_picker_page.dart';
 
 class AddContactsToParty extends StatefulWidget {
   const AddContactsToParty({Key? key}) : super(key: key);
@@ -23,13 +24,30 @@ class ContactContainer extends StatelessWidget {
     return Container(
       width: 20,
       height: 100,
-      child: Card(),
+      child: Card(
+        color: Colors.orange,
+        child: ListTile(),
+      ),
     );
   }
 }
 
 // Page to view details of a party
 class _AddContactsToParty extends State<AddContactsToParty> {
+  // Contact selected
+  Contact _contact = new Contact();
+
+  Future<void> _pickContact() async {
+    try {
+      final Contact? contact = await ContactsService.openDeviceContactPicker();
+      setState(() {
+        _contact = contact!;
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +78,9 @@ class _AddContactsToParty extends State<AddContactsToParty> {
                   width: 130,
                 ),
                 IconButton(
-                  onPressed: () => {},
+                  onPressed: () => {
+                    _pickContact(),
+                  },
                   icon: Icon(Icons.add),
                 )
               ],
