@@ -16,14 +16,25 @@ class _NewPartyPage extends State<NewPartyPage> {
   // Attributes of parties
   String nameParty = 'default';
   String dateParty = 'default';
+  String locationParty = 'default';
 
   final _formKey = GlobalKey<FormState>();
 
   Widget formName() {
     return TextFormField(
       decoration: const InputDecoration(
-        hintText: 'Name of the party',
-        labelText: 'Name *',
+        icon: Icon(
+          Icons.attractions_outlined,
+          size: 25,
+        ),
+        focusColor: Colors.orange,
+        labelText: "Name",
+        labelStyle: TextStyle(
+          color: Color.fromARGB(255, 252, 85, 19),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 252, 85, 19)),
+        ),
       ),
       onSaved: (value) {
         nameParty = value!;
@@ -40,15 +51,22 @@ class _NewPartyPage extends State<NewPartyPage> {
   Widget formLocation() {
     return TextFormField(
       decoration: const InputDecoration(
-        hintText: 'Name of the party',
-        labelText: 'Name *',
+        icon: Icon(Icons.add_location_alt_outlined),
+        focusColor: Colors.orange,
+        labelText: "Location",
+        labelStyle: TextStyle(
+          color: Color.fromARGB(255, 252, 85, 19),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 252, 85, 19)),
+        ),
       ),
       onSaved: (value) {
-        nameParty = value!;
+        locationParty = value!;
       },
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter a location';
         }
         return null;
       },
@@ -56,7 +74,12 @@ class _NewPartyPage extends State<NewPartyPage> {
   }
 
   Widget formTime() {
-    return TextButton(
+    return TextButton.icon(
+        icon: const Icon(
+          Icons.add_alarm,
+          size: 25,
+          color: Colors.white,
+        ),
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith(
                 (state) => Color.fromARGB(255, 252, 85, 19))),
@@ -86,7 +109,7 @@ class _NewPartyPage extends State<NewPartyPage> {
             print('confirm $dateParty');
           }, currentTime: DateTime(2022, 2, 20, 16, 00, 00));
         },
-        child: Text(
+        label: Text(
           'Choose a date and time',
           style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
         ));
@@ -95,30 +118,43 @@ class _NewPartyPage extends State<NewPartyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Create a new party'),
-          backgroundColor: Color.fromARGB(255, 252, 85, 19),
-        ),
-        backgroundColor: Color.fromARGB(228, 249, 245, 227),
-        body: Container(
-          margin: EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                formName(),
-                formTime(),
-                FloatingActionButton(
-                    child: const Icon(Icons.add),
-                    backgroundColor: Color.fromARGB(255, 252, 85, 19),
-                    onPressed: () => {
-                          if (_formKey.currentState!.validate())
-                            {_formKey.currentState!.save(), print(nameParty)}
-                        }),
-              ],
-            ),
+      appBar: AppBar(
+        title: const Text('Create a new party'),
+        backgroundColor: Color.fromARGB(255, 252, 85, 19),
+      ),
+      backgroundColor: Color.fromARGB(228, 249, 245, 227),
+      body: Container(
+        margin: EdgeInsets.all(40),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              formName(),
+              Container(
+                height: 40,
+              ),
+              formLocation(),
+              Container(
+                height: 50,
+              ),
+              formTime(),
+            ],
           ),
-        ));
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          backgroundColor: Color.fromARGB(255, 252, 85, 19),
+          onPressed: () => {
+                if (_formKey.currentState!.validate())
+                  {
+                    _formKey.currentState!.save(),
+                    print(dateParty),
+                    print(locationParty),
+                    print(nameParty)
+                  }
+              }),
+    );
   }
 }
