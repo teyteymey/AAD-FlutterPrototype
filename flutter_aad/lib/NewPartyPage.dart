@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_aad/AddContactsToParty.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'main.dart';
 
@@ -260,7 +261,11 @@ class _NewPartyPage extends State<NewPartyPage> {
                     print(timeParty),
                     print(dateParty),
                     print(descriptionParty)
-                  }
+                  },
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddContactsToParty()),
+                )
               }),
     );
   }
