@@ -8,27 +8,37 @@ var partyInfo = [
 
 void main() {
   runApp(
-    MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Upcoming parties'),
-          backgroundColor: Color.fromARGB(255, 252, 85, 19),
-        ),
-        body: Container(
-          color: Color.fromARGB(228, 249, 245, 227),
-          child: Column(
-            children: [for (var i in partyInfo) Party(i)],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: Color.fromARGB(255, 252, 85, 19),
-            child: const Icon(Icons.add),
-            onPressed: () {
-              PartyDetails();
-            }),
-      ),
-    ),
+    MaterialApp(home: PartiesPage()),
   );
+}
+
+class PartiesPage extends StatefulWidget {
+  _PartiesPageState createState() => _PartiesPageState();
+}
+
+class _PartiesPageState extends State<PartiesPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Upcoming parties'),
+        backgroundColor: Color.fromARGB(255, 252, 85, 19),
+      ),
+      backgroundColor: Color.fromARGB(228, 249, 245, 227),
+      body: Column(
+        children: [for (var i in partyInfo) Party(i)],
+      ),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color.fromARGB(255, 252, 85, 19),
+          child: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PartyDetails()),
+            );
+          }),
+    );
+  }
 }
 
 // Definition of class party
