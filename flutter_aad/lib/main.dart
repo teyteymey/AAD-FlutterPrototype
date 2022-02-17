@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_aad/PartyDetailsPage.dart';
+
+import 'NewPartyPage.dart';
 
 var partyInfo = [
   ['House Party', 'Deventer', '20 Feb, 20:00h', '2.jpg'],
@@ -34,14 +37,14 @@ class _PartiesPageState extends State<PartiesPage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PartyDetails()),
+              MaterialPageRoute(builder: (context) => NewPartyPage()),
             );
           }),
     );
   }
 }
 
-// Definition of class party
+// Definition of element party
 class Party extends StatelessWidget {
   //attributes of each party
   String titleParty = 'Default';
@@ -82,25 +85,6 @@ class Party extends StatelessWidget {
                 color: Colors.black),
           ),
           isThreeLine: true,
-        ),
-      ),
-    );
-  }
-}
-
-class PartyDetails extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Detail page of party!'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
         ),
       ),
     );
