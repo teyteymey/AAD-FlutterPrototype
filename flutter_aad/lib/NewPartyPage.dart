@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'main.dart';
 
 class NewPartyPage extends StatefulWidget {
   const NewPartyPage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _NewPartyPage extends State<NewPartyPage> {
   String locationParty = 'default';
   String descriptionParty = 'default';
   String timeParty = 'default';
-  TimeOfDay _time = TimeOfDay(hour: 20, minute: 15);
+  TimeOfDay _time = const TimeOfDay(hour: 20, minute: 15);
   DateTime _date = new DateTime(2022);
 
   final _formKey = GlobalKey<FormState>();
@@ -93,14 +94,15 @@ class _NewPartyPage extends State<NewPartyPage> {
   void _selectDate() async {
     final DateTime? newDate = await showDatePicker(
       context: context,
-      initialDate: DateTime(2022, 2, 20),
-      firstDate: DateTime(2022, 1),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2032, 7),
       helpText: 'Select a date',
+      initialDate: DateTime.now(),
     );
     if (newDate != null) {
       setState(() {
         _date = newDate;
+        print(_date);
       });
     }
   }
@@ -114,12 +116,13 @@ class _NewPartyPage extends State<NewPartyPage> {
         ),
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith(
-                (state) => Color.fromARGB(255, 252, 85, 19))),
+                (state) => const Color.fromARGB(255, 252, 85, 19))),
         onPressed: () {
+          timeParty = '';
           _selectTime();
           timeParty = '${_time.format(context)}h';
         },
-        label: Text(
+        label: const Text(
           'Choose a time',
           style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
         ));
@@ -134,12 +137,13 @@ class _NewPartyPage extends State<NewPartyPage> {
         ),
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith(
-                (state) => Color.fromARGB(255, 252, 85, 19))),
+                (state) => const Color.fromARGB(255, 252, 85, 19))),
         onPressed: () {
+          dateParty = "";
           _selectDate();
           dateParty = '${_date.day}/${_date.month}';
         },
-        label: Text(
+        label: const Text(
           'Choose a date',
           style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
         ));
@@ -154,7 +158,7 @@ class _NewPartyPage extends State<NewPartyPage> {
         ),
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith(
-                (state) => Color.fromARGB(255, 252, 85, 19))),
+                (state) => const Color.fromARGB(255, 252, 85, 19))),
         onPressed: () {
           DatePicker.showDateTimePicker(context, showTitleActions: true,
               onChanged: (date) {
@@ -181,7 +185,7 @@ class _NewPartyPage extends State<NewPartyPage> {
             print('confirm $dateParty');
           }, currentTime: DateTime(2022, 2, 20, 16, 00, 00));
         },
-        label: Text(
+        label: const Text(
           'Choose a date and time',
           style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
         ));
@@ -190,24 +194,14 @@ class _NewPartyPage extends State<NewPartyPage> {
   Widget formDescription() {
     return TextFormField(
       decoration: const InputDecoration(
-        icon: Icon(Icons.add_location_alt_outlined),
-        focusColor: Colors.orange,
-        labelText: "Description",
-        labelStyle: TextStyle(
-          color: Color.fromARGB(255, 252, 85, 19),
-        ),
-        enabledBorder: UnderlineInputBorder(
+        labelText: 'Description',
+        border: OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Color.fromARGB(255, 252, 85, 19)),
         ),
       ),
       onSaved: (value) {
-        locationParty = value!;
-      },
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter a location';
-        }
-        return null;
+        descriptionParty = value!;
       },
     );
   }
@@ -218,12 +212,12 @@ class _NewPartyPage extends State<NewPartyPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Create a new party'),
-        backgroundColor: Color.fromARGB(255, 252, 85, 19),
+        backgroundColor: const Color.fromARGB(255, 252, 85, 19),
       ),
-      backgroundColor: Color.fromARGB(228, 249, 245, 227),
+      backgroundColor: const Color.fromARGB(228, 249, 245, 227),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(40),
+          margin: const EdgeInsets.all(40),
           child: Form(
             key: _formKey,
             child: Column(
@@ -255,16 +249,17 @@ class _NewPartyPage extends State<NewPartyPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          backgroundColor: Color.fromARGB(255, 252, 85, 19),
+          child: const Icon(Icons.check),
+          backgroundColor: const Color.fromARGB(255, 74, 206, 162),
           onPressed: () => {
                 if (_formKey.currentState!.validate())
                   {
                     _formKey.currentState!.save(),
-                    print(dateParty),
-                    print(locationParty),
                     print(nameParty),
+                    print(locationParty),
                     print(timeParty),
+                    print(dateParty),
+                    print(descriptionParty)
                   }
               }),
     );

@@ -3,7 +3,7 @@ import 'package:flutter_aad/PartyDetailsPage.dart';
 
 import 'NewPartyPage.dart';
 
-var partyInfo = [
+List<List<String>> partyInfo = [
   ['House Party', 'Deventer', '20 Feb, 20:00h', '2.jpg'],
   ['Disco', 'Deventer', '20 Feb, 20:00h', '3.jpg'],
   ['Costume Party', 'Den Heks, Deventer', '15 Feb, 17:00h', '1.jpg'],
@@ -27,7 +27,7 @@ class _PartiesPageState extends State<PartiesPage> {
         title: const Text('Upcoming parties'),
         backgroundColor: Color.fromARGB(255, 252, 85, 19),
       ),
-      backgroundColor: Color.fromARGB(228, 249, 245, 227),
+      backgroundColor: Color.fromARGB(227, 255, 252, 232),
       body: Column(
         children: [for (var i in partyInfo) Party(i)],
       ),
@@ -65,7 +65,7 @@ class Party extends StatelessWidget {
     return TextButton(
       onPressed: () {},
       child: Card(
-        color: Color.fromARGB(255, 146, 255, 219),
+        color: Color.fromARGB(255, 152, 255, 221),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: ListTile(
