@@ -17,6 +17,10 @@ class _NewPartyPage extends State<NewPartyPage> {
   String nameParty = 'default';
   String dateParty = 'default';
   String locationParty = 'default';
+  String descriptionParty = 'default';
+  String timeParty = 'default';
+  TimeOfDay _time = TimeOfDay(hour: 20, minute: 15);
+  DateTime _date = new DateTime(2022);
 
   final _formKey = GlobalKey<FormState>();
 
@@ -73,7 +77,75 @@ class _NewPartyPage extends State<NewPartyPage> {
     );
   }
 
+  void _selectTime() async {
+    final TimeOfDay? newTime = await showTimePicker(
+      context: context,
+      initialTime: _time,
+      initialEntryMode: TimePickerEntryMode.input,
+    );
+    if (newTime != null) {
+      setState(() {
+        _time = newTime;
+      });
+    }
+  }
+
+  void _selectDate() async {
+    final DateTime? newDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime(2022, 2, 20),
+      firstDate: DateTime(2022, 1),
+      lastDate: DateTime(2032, 7),
+      helpText: 'Select a date',
+    );
+    if (newDate != null) {
+      setState(() {
+        _date = newDate;
+      });
+    }
+  }
+
   Widget formTime() {
+    return TextButton.icon(
+        icon: const Icon(
+          Icons.add_alarm,
+          size: 25,
+          color: Colors.white,
+        ),
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith(
+                (state) => Color.fromARGB(255, 252, 85, 19))),
+        onPressed: () {
+          _selectTime();
+          timeParty = '${_time.format(context)}h';
+        },
+        label: Text(
+          'Choose a time',
+          style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
+        ));
+  }
+
+  Widget formDate() {
+    return TextButton.icon(
+        icon: const Icon(
+          Icons.calendar_today,
+          size: 25,
+          color: Colors.white,
+        ),
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith(
+                (state) => Color.fromARGB(255, 252, 85, 19))),
+        onPressed: () {
+          _selectDate();
+          dateParty = '${_date.day}/${_date.month}';
+        },
+        label: Text(
+          'Choose a date',
+          style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
+        ));
+  }
+
+  Widget formTimeIOS() {
     return TextButton.icon(
         icon: const Icon(
           Icons.add_alarm,
@@ -115,31 +187,70 @@ class _NewPartyPage extends State<NewPartyPage> {
         ));
   }
 
+  Widget formDescription() {
+    return TextFormField(
+      decoration: const InputDecoration(
+        icon: Icon(Icons.add_location_alt_outlined),
+        focusColor: Colors.orange,
+        labelText: "Description",
+        labelStyle: TextStyle(
+          color: Color.fromARGB(255, 252, 85, 19),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color.fromARGB(255, 252, 85, 19)),
+        ),
+      ),
+      onSaved: (value) {
+        locationParty = value!;
+      },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter a location';
+        }
+        return null;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Create a new party'),
         backgroundColor: Color.fromARGB(255, 252, 85, 19),
       ),
       backgroundColor: Color.fromARGB(228, 249, 245, 227),
-      body: Container(
-        margin: EdgeInsets.all(40),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              formName(),
-              Container(
-                height: 40,
-              ),
-              formLocation(),
-              Container(
-                height: 50,
-              ),
-              formTime(),
-            ],
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(40),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 40,
+                ),
+                formName(),
+                Container(
+                  height: 25,
+                ),
+                formLocation(),
+                Container(
+                  height: 40,
+                ),
+                formTime(),
+                Container(
+                  height: 20,
+                ),
+                formDate(),
+                Container(
+                  height: 50,
+                ),
+                formDescription(),
+              ],
+            ),
           ),
         ),
       ),
@@ -152,7 +263,8 @@ class _NewPartyPage extends State<NewPartyPage> {
                     _formKey.currentState!.save(),
                     print(dateParty),
                     print(locationParty),
-                    print(nameParty)
+                    print(nameParty),
+                    print(timeParty),
                   }
               }),
     );
