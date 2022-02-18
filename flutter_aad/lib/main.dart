@@ -18,27 +18,30 @@ class PartiesPage extends StatefulWidget {
 class _PartiesPageState extends State<PartiesPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Upcoming parties'),
-        backgroundColor: const Color.fromARGB(255, 252, 85, 19),
-      ),
-      backgroundColor: const Color.fromARGB(239, 255, 255, 253),
-      body: Column(
-        children: [
-          for (var i in globals.partyInfo) Party(i)
-        ], //pass all the info of the party, so if we click the details of the contacts are already there
-      ),
-      floatingActionButton: FloatingActionButton(
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text('Upcoming parties'),
           backgroundColor: const Color.fromARGB(255, 252, 85, 19),
-          child: const Icon(Icons.add),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const NewPartyPage()),
-            );
-          }),
+        ),
+        backgroundColor: const Color.fromARGB(239, 255, 255, 253),
+        body: Column(
+          children: [
+            for (var i in globals.partyInfo) Party(i)
+          ], //pass all the info of the party, so if we click the details of the contacts are already there
+        ),
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: const Color.fromARGB(255, 252, 85, 19),
+            child: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NewPartyPage()),
+              );
+            }),
+      ),
     );
   }
 }
@@ -97,6 +100,10 @@ class Party extends StatelessWidget {
             icon: Icon(Icons.remove_circle_outline),
             onPressed: () {
               deleteParty();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PartiesPage()),
+              );
             },
           ),
         ),
