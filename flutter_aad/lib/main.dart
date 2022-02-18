@@ -20,22 +20,23 @@ class _PartiesPageState extends State<PartiesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Upcoming parties'),
-        backgroundColor: Color.fromARGB(255, 252, 85, 19),
+        backgroundColor: const Color.fromARGB(255, 252, 85, 19),
       ),
-      backgroundColor: Color.fromARGB(239, 255, 255, 253),
+      backgroundColor: const Color.fromARGB(239, 255, 255, 253),
       body: Column(
         children: [
           for (var i in globals.partyInfo) Party(i)
         ], //pass all the info of the party, so if we click the details of the contacts are already there
       ),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Color.fromARGB(255, 252, 85, 19),
+          backgroundColor: const Color.fromARGB(255, 252, 85, 19),
           child: const Icon(Icons.add),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => NewPartyPage()),
+              MaterialPageRoute(builder: (context) => const NewPartyPage()),
             );
           }),
     );
@@ -64,6 +65,7 @@ class Party extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
+        print(globals.partyInfo);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -71,7 +73,7 @@ class Party extends StatelessWidget {
         );
       },
       child: Card(
-        color: Color.fromARGB(255, 152, 255, 221),
+        color: const Color.fromARGB(255, 152, 255, 221),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: ListTile(
