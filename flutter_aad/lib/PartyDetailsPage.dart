@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
 class PartyDetailsPage extends StatefulWidget {
-  List<List<String>> data = [];
+  List<List<String>> dataParty = [];
 
-  PartyDetailsPage(List<String> data) {
-    data = data;
+  PartyDetailsPage(List<List<String>> data) {
+    dataParty = data;
   }
 
-  _PartyDetailsPage createState() => _PartyDetailsPage(data);
+  _PartyDetailsPage createState() => _PartyDetailsPage(dataParty);
 }
 
 // Page to view details of a party
 class _PartyDetailsPage extends State<PartyDetailsPage> {
   //Attributes of class
-  List<List<String>> data = [];
+  List<List<String>> dataParty = [];
 
   // Constructor method
   _PartyDetailsPage(List<List<String>> data) {
-    data = data;
+    dataParty = data;
   }
 
   @override

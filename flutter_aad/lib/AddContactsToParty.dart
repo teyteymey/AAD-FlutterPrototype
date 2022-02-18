@@ -1,5 +1,6 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
+import 'PartyDetailsPage.dart';
 import 'contacts_picker_page.dart';
 
 class AddContactsToParty extends StatefulWidget {
@@ -9,7 +10,6 @@ class AddContactsToParty extends StatefulWidget {
 
   AddContactsToParty(List<String> data) {
     dataParty = data;
-    print(data);
   }
 
   @override
@@ -131,38 +131,40 @@ class _AddContactsToParty extends State<AddContactsToParty> {
         title: const Text('Select contacts'),
         backgroundColor: const Color.fromARGB(255, 252, 85, 19),
       ),
-      body: Column(
-        children: [
-          Padding(padding: EdgeInsets.all(20)),
-          Container(
-            decoration: const BoxDecoration(
-                color: Colors.orangeAccent,
-                borderRadius: BorderRadius.all(Radius.circular(20))),
-            margin: const EdgeInsets.all(15.0),
-            child: Row(
-              children: [
-                Padding(padding: EdgeInsets.all(20)),
-                const Text(
-                  "Contacts:",
-                  style: TextStyle(
-                    fontFamily: 'JosefinSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25.0,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.all(20)),
+            Container(
+              decoration: const BoxDecoration(
+                  color: Colors.orangeAccent,
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              margin: const EdgeInsets.all(15.0),
+              child: Row(
+                children: [
+                  Padding(padding: EdgeInsets.all(20)),
+                  const Text(
+                    "Contacts:",
+                    style: TextStyle(
+                      fontFamily: 'JosefinSans',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25.0,
+                    ),
                   ),
-                ),
-                Container(
-                  width: 130,
-                ),
-                IconButton(
-                  onPressed: () => {_pickContact()},
-                  icon: Icon(Icons.add),
-                )
-              ],
+                  Container(
+                    width: 130,
+                  ),
+                  IconButton(
+                    onPressed: () => {_pickContact()},
+                    icon: Icon(Icons.add),
+                  )
+                ],
+              ),
             ),
-          ),
-          //add los contacts
-          for (var contact in contacts) ContactContainer(contact)
-        ],
+            //add los contacts
+            for (var contact in contacts) ContactContainer(contact)
+          ],
+        ),
       ),
       // Button that confirms data introduced in the party -> now the party details will be shown
       floatingActionButton: FloatingActionButton(
@@ -171,12 +173,12 @@ class _AddContactsToParty extends State<AddContactsToParty> {
           onPressed: () {
             //this will make the corresponding list with details of the party and info about the participants
             formatDetailsOfParty();
-            print(finalDetailsParty);
-            /*  Navigator.push(
+            //print(finalDetailsParty);
+            Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PartyDetailsPage()),
+              MaterialPageRoute(
+                  builder: (context) => PartyDetailsPage(finalDetailsParty)),
             );
-          */
           }),
     );
   }
