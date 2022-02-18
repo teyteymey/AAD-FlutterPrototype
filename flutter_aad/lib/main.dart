@@ -24,7 +24,7 @@ class _PartiesPageState extends State<PartiesPage> {
       ),
       backgroundColor: Color.fromARGB(227, 255, 252, 232),
       body: Column(
-        children: [for (var i in globals.partyInfo) Party(i)],
+        children: [for (var i in globals.partyInfo) Party(i[0])],
       ),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Color.fromARGB(255, 252, 85, 19),

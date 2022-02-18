@@ -13,20 +13,47 @@ class AddContactsToParty extends StatefulWidget {
 
 class ContactContainer extends StatelessWidget {
   String name = 'def';
-  List<String> contactDetails = [];
+  String email = '';
+  String phone = '';
+  Contact contactDetails = Contact();
 
-  ContactContainer(List<String> contactDetails) {
+  ContactContainer(Contact contactDetails) {
     contactDetails = contactDetails;
+    name = contactDetails.displayName!;
+
+    if (!contactDetails.emails!.isEmpty) {
+      email = contactDetails.emails!.first.value!;
+    } else {
+      email = 'There are no emails registered';
+    }
+
+    if (!contactDetails.phones!.isEmpty) {
+      phone = contactDetails.phones!.first.value!;
+    } else {
+      phone = 'There are no phones registered';
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 20,
-      height: 100,
+      width: 300,
+      height: 90,
       child: Card(
-        color: Colors.orange,
-        child: ListTile(),
+        color: Color.fromARGB(215, 255, 201, 119),
+        child: ListTile(
+          isThreeLine: true,
+          title: Text(name,
+              style: const TextStyle(
+                fontFamily: 'JosefinSans',
+                fontWeight: FontWeight.w900,
+                fontSize: 22.0,
+              )),
+          subtitle: Text(
+            email + '\n' + phone,
+            style: TextStyle(color: Colors.black.withOpacity(0.6)),
+          ),
+        ),
       ),
     );
   }
@@ -37,11 +64,15 @@ class _AddContactsToParty extends State<AddContactsToParty> {
   // Contact selected
   Contact _contact = new Contact();
 
+  List<Contact> contacts = [];
+  List<String> partyDetails = [];
+
   Future<void> _pickContact() async {
     try {
       final Contact? contact = await ContactsService.openDeviceContactPicker();
       setState(() {
         _contact = contact!;
+        contacts.add(_contact);
       });
     } catch (e) {
       print(e.toString());
@@ -78,15 +109,14 @@ class _AddContactsToParty extends State<AddContactsToParty> {
                   width: 130,
                 ),
                 IconButton(
-                  onPressed: () => {
-                    _pickContact(),
-                  },
+                  onPressed: () => {_pickContact()},
                   icon: Icon(Icons.add),
                 )
               ],
             ),
           ),
           //add los contacts
+          for (var contact in contacts) ContactContainer(contact)
         ],
       ),
       floatingActionButton: FloatingActionButton(

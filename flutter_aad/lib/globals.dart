@@ -5,7 +5,8 @@ import 'package:contacts_service/contacts_service.dart';
 List<List<List<String>>> partyInfo = [
   [
     ['House Party', 'Deventer', '20 Feb, 20:00h', '2.jpg'],
-    []
+    [],
+    [],
   ],
   [
     ['Disco', 'Deventer', '20 Feb, 20:00h', '3.jpg'],
