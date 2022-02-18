@@ -27,6 +27,9 @@ class contactInfo extends StatelessWidget {
       width: 300,
       height: 90,
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
         color: Color.fromARGB(225, 137, 255, 239),
         child: ListTile(
           isThreeLine: true,
@@ -152,7 +155,10 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
               margin: const EdgeInsets.all(15.0),
               child: Row(
                 children: [
-                  Text(
+                  Container(
+                    width: 20,
+                  ),
+                  const Text(
                     "Participants:",
                     textAlign: TextAlign.center,
                     style: TextStyle(
