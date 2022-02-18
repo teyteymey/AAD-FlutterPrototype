@@ -34,7 +34,7 @@ class _NewPartyPage extends State<NewPartyPage> {
   void randomImage() {
     Random random = new Random();
     int randomNumber = random.nextInt(3) + 1;
-    image = '$randomNumber+.jpg';
+    image = '$randomNumber.jpg';
   }
 
   Widget formName() {
@@ -268,6 +268,7 @@ class _NewPartyPage extends State<NewPartyPage> {
                   {
                     _formKey.currentState!.save(),
                   },
+                randomImage(),
                 partyInfo.addAll([
                   nameParty,
                   locationParty,

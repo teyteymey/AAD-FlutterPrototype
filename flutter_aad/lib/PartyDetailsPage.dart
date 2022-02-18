@@ -1,3 +1,6 @@
+//import 'dart:html';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PartyDetailsPage extends StatefulWidget {
@@ -34,14 +37,45 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(239, 255, 255, 253),
       appBar: AppBar(
         title: const Text('Detail page of party!'),
         automaticallyImplyLeading: false,
+        backgroundColor: Color.fromARGB(255, 252, 85, 19),
       ),
-      body: SingleChildScrollView(
-          child: Column(
-        children: [Text(nameParty)],
-      )),
+      body: SafeArea(
+        child: SingleChildScrollView(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(padding: EdgeInsets.all(10)),
+            Text(
+              nameParty,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 116, 78, 28),
+                  fontSize: 30),
+              textAlign: TextAlign.center,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Image(
+                image: AssetImage("images/" + imageParty),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 40),
+              child: Text(
+                locationParty + '\n' + timeParty,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 116, 78, 28),
+                    fontSize: 15),
+              ),
+            ),
+          ],
+        )),
+      ),
     );
   }
 }

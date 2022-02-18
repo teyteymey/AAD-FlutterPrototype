@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_aad/PartyDetailsPage.dart';
 import 'globals.dart' as globals;
+//import 'dart:html';
 
 import 'NewPartyPage.dart';
 
@@ -22,7 +23,7 @@ class _PartiesPageState extends State<PartiesPage> {
         title: const Text('Upcoming parties'),
         backgroundColor: Color.fromARGB(255, 252, 85, 19),
       ),
-      backgroundColor: Color.fromARGB(227, 255, 252, 232),
+      backgroundColor: Color.fromARGB(239, 255, 255, 253),
       body: Column(
         children: [for (var i in globals.partyInfo) Party(i[0])],
       ),
