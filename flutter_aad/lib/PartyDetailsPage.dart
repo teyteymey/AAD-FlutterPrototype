@@ -5,12 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_aad/main.dart';
 import 'package:intl/intl.dart';
+import 'globals.dart' as globals;
 
 import 'package:add_2_calendar/add_2_calendar.dart';
 
-class PartyDetailsPage extends StatefulWidget {
-  List<List<String>> dataParty = [];
+List<List<String>> dataParty = [];
 
+class PartyDetailsPage extends StatefulWidget {
   PartyDetailsPage(List<List<String>> data) {
     dataParty = data;
   }
@@ -36,6 +37,17 @@ class contactInfo extends StatelessWidget {
         ),
         color: const Color.fromARGB(225, 137, 255, 239),
         child: ListTile(
+          trailing: IconButton(
+            icon: Icon(Icons.remove_circle_outline),
+            onPressed: () {
+              deleteContact(contactDetails);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PartyDetailsPage(dataParty)),
+              );
+            },
+          ),
           isThreeLine: true,
           title: Text(contactDetails[0],
               style: const TextStyle(
@@ -54,6 +66,14 @@ class contactInfo extends StatelessWidget {
   }
 }
 
+void deleteContact(List<String> contactDetailsPar) {
+  globals.partyInfo
+      .remove(dataParty); // We remove the whole info of the party in globals
+  dataParty.remove(contactDetailsPar); // We edit the party details
+  globals.partyInfo
+      .add(dataParty); //We add again the party with the participants updated
+}
+
 // Page to view details of a party
 class _PartyDetailsPage extends State<PartyDetailsPage> {
   //Attributes of class
@@ -68,7 +88,6 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
 
   // Constructor method
   _PartyDetailsPage(List<List<String>> data) {
-    print(data);
     dataParty = data;
     nameParty = dataParty[0][0];
     locationParty = dataParty[0][1];
