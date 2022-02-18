@@ -24,6 +24,8 @@ class _NewPartyPage extends State<NewPartyPage> {
   TimeOfDay _time = const TimeOfDay(hour: 20, minute: 15);
   DateTime _date = new DateTime(2022);
 
+  List<String> partyInfo = [];
+
   final _formKey = GlobalKey<FormState>();
 
   Widget formName() {
@@ -262,9 +264,17 @@ class _NewPartyPage extends State<NewPartyPage> {
                     print(dateParty),
                     print(descriptionParty)
                   },
+                partyInfo.addAll([
+                  nameParty,
+                  locationParty,
+                  timeParty,
+                  dateParty,
+                  descriptionParty
+                ]),
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AddContactsToParty()),
+                  MaterialPageRoute(
+                      builder: (context) => AddContactsToParty(partyInfo)),
                 )
               }),
     );

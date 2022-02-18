@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import 'contacts_picker_page.dart';
 
 class AddContactsToParty extends StatefulWidget {
-  const AddContactsToParty({Key? key}) : super(key: key);
+  //const AddContactsToParty({Key? key}) : super(key: key);
+
+  List<String> dataParty = [];
+
+  AddContactsToParty(List<String> data) {
+    dataParty = data;
+    print(data);
+  }
 
   @override
   State<StatefulWidget> createState() {
-    return _AddContactsToParty();
+    return _AddContactsToParty(dataParty);
   }
 }
 
@@ -66,6 +73,44 @@ class _AddContactsToParty extends State<AddContactsToParty> {
 
   List<Contact> contacts = [];
   List<String> partyDetails = [];
+  List<List<String>> finalDetailsParty = [];
+
+  _AddContactsToParty(List<String> data) {
+    partyDetails = data;
+  }
+
+  void formatDetailsOfParty() {
+    List<String> temp = [];
+    String email, phone, displayName;
+
+    // in the first position, we add the details of the party.
+    // the following lists are going to be details of participants of the party
+    finalDetailsParty.add(partyDetails);
+
+    // For each contact, we extract the details that are going to be associated to a party
+    for (Contact contact in contacts) {
+      if (!contact.displayName!.isEmpty) {
+        displayName = contact.displayName!;
+      } else {
+        displayName = 'There is no name registered';
+      }
+
+      if (!contact.emails!.isEmpty) {
+        email = contact.emails!.first.value!;
+      } else {
+        email = 'There are no emails registered';
+      }
+
+      if (!contact.phones!.isEmpty) {
+        phone = contact.phones!.first.value!;
+      } else {
+        phone = 'There are no phones registered';
+      }
+
+      temp = [displayName, phone, email];
+      finalDetailsParty.add(temp);
+    }
+  }
 
   Future<void> _pickContact() async {
     try {
@@ -119,13 +164,17 @@ class _AddContactsToParty extends State<AddContactsToParty> {
           for (var contact in contacts) ContactContainer(contact)
         ],
       ),
+      // Button that confirms data introduced in the party -> now the party details will be shown
       floatingActionButton: FloatingActionButton(
           backgroundColor: const Color.fromARGB(255, 252, 85, 19),
           child: const Icon(Icons.check),
           onPressed: () {
+            //this will make the corresponding list with details of the party and info about the participants
+            formatDetailsOfParty();
+            print(finalDetailsParty);
             /*  Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => NewPartyPage()),
+              MaterialPageRoute(builder: (context) => PartyDetailsPage()),
             );
           */
           }),

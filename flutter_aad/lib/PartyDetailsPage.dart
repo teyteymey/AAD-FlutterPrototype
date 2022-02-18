@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PartyDetailsPage extends StatefulWidget {
-  List<String> data = [];
+  List<List<String>> data = [];
 
   PartyDetailsPage(List<String> data) {
     data = data;
@@ -13,10 +13,10 @@ class PartyDetailsPage extends StatefulWidget {
 // Page to view details of a party
 class _PartyDetailsPage extends State<PartyDetailsPage> {
   //Attributes of class
-  List<String> data = [];
+  List<List<String>> data = [];
 
   // Constructor method
-  _PartyDetailsPage(List<String> data) {
+  _PartyDetailsPage(List<List<String>> data) {
     data = data;
   }
 
