@@ -93,8 +93,18 @@ class Party extends StatelessWidget {
                 color: Colors.black),
           ),
           isThreeLine: true,
+          trailing: IconButton(
+            icon: Icon(Icons.remove_circle_outline),
+            onPressed: () {
+              deleteParty();
+            },
+          ),
         ),
       ),
     );
+  }
+
+  void deleteParty() {
+    globals.partyInfo.remove(allPartyDetails);
   }
 }
