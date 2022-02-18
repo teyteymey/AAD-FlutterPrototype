@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_aad/AddContactsToParty.dart';
@@ -21,12 +23,19 @@ class _NewPartyPage extends State<NewPartyPage> {
   String locationParty = 'default';
   String descriptionParty = 'default';
   String timeParty = 'default';
+  String image = '1.jpg';
   TimeOfDay _time = const TimeOfDay(hour: 20, minute: 15);
   DateTime _date = new DateTime(2022);
 
   List<String> partyInfo = [];
 
   final _formKey = GlobalKey<FormState>();
+
+  void randomImage() {
+    Random random = new Random();
+    int randomNumber = random.nextInt(3) + 1;
+    image = '$randomNumber+.jpg';
+  }
 
   Widget formName() {
     return TextFormField(
@@ -258,18 +267,13 @@ class _NewPartyPage extends State<NewPartyPage> {
                 if (_formKey.currentState!.validate())
                   {
                     _formKey.currentState!.save(),
-                    print(nameParty),
-                    print(locationParty),
-                    print(timeParty),
-                    print(dateParty),
-                    print(descriptionParty)
                   },
                 partyInfo.addAll([
                   nameParty,
                   locationParty,
-                  timeParty,
-                  dateParty,
-                  descriptionParty
+                  dateParty + ', ' + timeParty + 'h',
+                  image,
+                  descriptionParty,
                 ]),
                 Navigator.push(
                   context,

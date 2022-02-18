@@ -76,6 +76,7 @@ class _AddContactsToParty extends State<AddContactsToParty> {
   List<List<String>> finalDetailsParty = [];
 
   _AddContactsToParty(List<String> data) {
+    print(data);
     partyDetails = data;
   }
 

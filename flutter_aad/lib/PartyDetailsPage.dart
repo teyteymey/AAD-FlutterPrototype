@@ -14,10 +14,21 @@ class PartyDetailsPage extends StatefulWidget {
 class _PartyDetailsPage extends State<PartyDetailsPage> {
   //Attributes of class
   List<List<String>> dataParty = [];
+  String nameParty = '',
+      locationParty = '',
+      timeParty = '',
+      imageParty = '',
+      descriptionParty = '';
 
   // Constructor method
   _PartyDetailsPage(List<List<String>> data) {
+    print(data);
     dataParty = data;
+    nameParty = dataParty[0][0];
+    locationParty = dataParty[0][1];
+    timeParty = dataParty[0][2];
+    imageParty = dataParty[0][3];
+    descriptionParty = dataParty[0][4];
   }
 
   @override
@@ -25,15 +36,12 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail page of party!'),
+        automaticallyImplyLeading: false,
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
-        ),
-      ),
+      body: SingleChildScrollView(
+          child: Column(
+        children: [Text(nameParty)],
+      )),
     );
   }
 }
