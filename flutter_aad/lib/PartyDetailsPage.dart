@@ -1,5 +1,6 @@
 //import 'dart:html';
 
+import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -49,6 +50,8 @@ class contactInfo extends StatelessWidget {
 class _PartyDetailsPage extends State<PartyDetailsPage> {
   //Attributes of class
   List<List<String>> dataParty = [];
+  Contact _contact = Contact();
+
   String nameParty = '',
       locationParty = '',
       timeParty = '',
@@ -64,6 +67,42 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
     timeParty = dataParty[0][2];
     imageParty = dataParty[0][3];
     descriptionParty = dataParty[0][4];
+  }
+
+  Future<void> _pickContact() async {
+    try {
+      final Contact? contact = await ContactsService.openDeviceContactPicker();
+      setState(() {
+        _contact = contact!;
+
+        // We need to add the new contact to the list of data of the party
+        List<String> temp = [];
+        String email, phone, displayName;
+
+        if (!_contact.displayName!.isEmpty) {
+          displayName = contact.displayName!;
+        } else {
+          displayName = 'There is no name registered';
+        }
+
+        if (!_contact.emails!.isEmpty) {
+          email = contact.emails!.first.value!;
+        } else {
+          email = 'There are no emails registered';
+        }
+
+        if (!_contact.phones!.isEmpty) {
+          phone = contact.phones!.first.value!;
+        } else {
+          phone = 'There are no phones registered';
+        }
+
+        temp = [displayName, phone, email];
+        dataParty.add(temp);
+      });
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -111,16 +150,25 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
                   color: Colors.orangeAccent,
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               margin: const EdgeInsets.all(15.0),
-              child: const Center(
-                child: Text(
-                  "Participants:",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'JosefinSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25.0,
+              child: Row(
+                children: [
+                  Text(
+                    "Participants:",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'JosefinSans',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25.0,
+                    ),
                   ),
-                ),
+                  Container(
+                    width: 130,
+                  ),
+                  IconButton(
+                    onPressed: () => {_pickContact()},
+                    icon: Icon(Icons.add),
+                  )
+                ],
               ),
             ),
             //add los contacts
