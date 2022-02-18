@@ -3,6 +3,7 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_aad/main.dart';
 
 class PartyDetailsPage extends StatefulWidget {
   List<List<String>> dataParty = [];
@@ -37,11 +38,12 @@ class contactInfo extends StatelessWidget {
               style: const TextStyle(
                 fontFamily: 'JosefinSans',
                 fontWeight: FontWeight.w900,
-                fontSize: 15.0,
+                fontSize: 17.0,
               )),
           subtitle: Text(
             contactDetails[1] + '\n' + contactDetails[2],
-            style: TextStyle(color: Colors.black.withOpacity(0.6)),
+            style:
+                TextStyle(color: Colors.black.withOpacity(0.6), fontSize: 13),
           ),
         ),
       ),
@@ -112,6 +114,15 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(239, 255, 255, 253),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color.fromARGB(255, 252, 85, 19),
+          child: const Icon(Icons.house_outlined),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PartiesPage()),
+            );
+          }),
       appBar: AppBar(
         title: const Text('Detail page of party!'),
         automaticallyImplyLeading: false,

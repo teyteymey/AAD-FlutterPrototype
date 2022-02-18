@@ -25,7 +25,9 @@ class _PartiesPageState extends State<PartiesPage> {
       ),
       backgroundColor: Color.fromARGB(239, 255, 255, 253),
       body: Column(
-        children: [for (var i in globals.partyInfo) Party(i[0])],
+        children: [
+          for (var i in globals.partyInfo) Party(i)
+        ], //pass all the info of the party, so if we click the details of the contacts are already there
       ),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Color.fromARGB(255, 252, 85, 19),
@@ -47,19 +49,27 @@ class Party extends StatelessWidget {
   String locationParty = 'Default';
   String dateParty = 'Default';
   String imageParty = "1.jpg";
+  List<List<String>> allPartyDetails = [];
 
   //creator methods with parameters
-  Party(List<String> list) {
-    titleParty = list[0];
-    locationParty = list[1];
-    dateParty = list[2];
-    imageParty = list[3];
+  Party(List<List<String>> list) {
+    titleParty = list[0][0];
+    locationParty = list[0][1];
+    dateParty = list[0][2];
+    imageParty = list[0][3];
+    allPartyDetails = list;
   }
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => PartyDetailsPage(allPartyDetails)),
+        );
+      },
       child: Card(
         color: Color.fromARGB(255, 152, 255, 221),
         shape:

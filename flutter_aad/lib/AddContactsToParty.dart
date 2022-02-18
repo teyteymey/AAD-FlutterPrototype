@@ -2,6 +2,7 @@ import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'PartyDetailsPage.dart';
 import 'contacts_picker_page.dart';
+import 'globals.dart' as globals;
 
 class AddContactsToParty extends StatefulWidget {
   //const AddContactsToParty({Key? key}) : super(key: key);
@@ -174,6 +175,7 @@ class _AddContactsToParty extends State<AddContactsToParty> {
           onPressed: () {
             //this will make the corresponding list with details of the party and info about the participants
             formatDetailsOfParty();
+            AddParty();
             //print(finalDetailsParty);
             Navigator.push(
               context,
@@ -182,5 +184,10 @@ class _AddContactsToParty extends State<AddContactsToParty> {
             );
           }),
     );
+  }
+
+  void AddParty() {
+    globals.partyInfo.add(finalDetailsParty);
+    print(finalDetailsParty);
   }
 }

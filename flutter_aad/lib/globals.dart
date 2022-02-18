@@ -4,16 +4,15 @@ import 'package:contacts_service/contacts_service.dart';
 
 List<List<List<String>>> partyInfo = [
   [
-    ['House Party', 'Deventer', '20 Feb, 20:00h', '2.jpg', 'descriptiooon'],
-    [],
-    [],
-  ],
-  [
-    ['Disco', 'Deventer', '20 Feb, 20:00h', '3.jpg'],
-    []
-  ],
-  [
-    ['Costume Party', 'Den Heks, Deventer', '15 Feb, 17:00h', '1.jpg'],
-    []
+    [
+      'Party rock',
+      'Deventer',
+      '12/2, 20:15h',
+      '1.jpg',
+      'In the house toniiight everybody just have a good time'
+    ],
+    ['Ariadna Meyer', '+34 644 36 55 61', 'ariadnameyer@gmail.com'],
+    ['Paula Cruzado', '+34 635 84 46 78', 'There are no emails registered'],
+    ['Dani Gonzalez', '+34 640 61 59 86', 'There are no emails registered']
   ]
 ];
