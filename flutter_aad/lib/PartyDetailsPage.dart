@@ -13,6 +13,38 @@ class PartyDetailsPage extends StatefulWidget {
   _PartyDetailsPage createState() => _PartyDetailsPage(dataParty);
 }
 
+class contactInfo extends StatelessWidget {
+  List<String> contactDetails = [];
+
+  contactInfo(List<String> contactDetailsPar) {
+    contactDetails = contactDetailsPar;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 300,
+      height: 50,
+      child: Card(
+        color: Color.fromARGB(225, 137, 255, 239),
+        child: ListTile(
+          isThreeLine: true,
+          title: Text(contactDetails[0],
+              style: const TextStyle(
+                fontFamily: 'JosefinSans',
+                fontWeight: FontWeight.w900,
+                fontSize: 22.0,
+              )),
+          subtitle: Text(
+            contactDetails[1] + '\n' + contactDetails[2],
+            style: TextStyle(color: Colors.black.withOpacity(0.6)),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 // Page to view details of a party
 class _PartyDetailsPage extends State<PartyDetailsPage> {
   //Attributes of class
@@ -37,18 +69,18 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(239, 255, 255, 253),
+      backgroundColor: const Color.fromARGB(239, 255, 255, 253),
       appBar: AppBar(
         title: const Text('Detail page of party!'),
         automaticallyImplyLeading: false,
-        backgroundColor: Color.fromARGB(255, 252, 85, 19),
+        backgroundColor: const Color.fromARGB(255, 252, 85, 19),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(padding: EdgeInsets.all(10)),
+            const Padding(padding: EdgeInsets.all(10)),
             Text(
               nameParty,
               style: const TextStyle(
@@ -73,6 +105,27 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
                     fontSize: 15),
               ),
             ),
+            Container(
+              height: 40,
+              decoration: const BoxDecoration(
+                  color: Colors.orangeAccent,
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              margin: const EdgeInsets.all(15.0),
+              child: const Center(
+                child: Text(
+                  "Participants:",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'JosefinSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0,
+                  ),
+                ),
+              ),
+            ),
+            //add los contacts
+            for (int i = 1; i < dataParty.length; i++)
+              contactInfo(dataParty.elementAt(i))
           ],
         )),
       ),

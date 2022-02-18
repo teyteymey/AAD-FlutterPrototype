@@ -272,7 +272,7 @@ class _NewPartyPage extends State<NewPartyPage> {
                 partyInfo.addAll([
                   nameParty,
                   locationParty,
-                  dateParty + ', ' + timeParty + 'h',
+                  dateParty + ', ' + timeParty,
                   image,
                   descriptionParty,
                 ]),
