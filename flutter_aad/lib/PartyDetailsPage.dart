@@ -24,7 +24,7 @@ class contactInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 300,
-      height: 50,
+      height: 90,
       child: Card(
         color: Color.fromARGB(225, 137, 255, 239),
         child: ListTile(
@@ -33,7 +33,7 @@ class contactInfo extends StatelessWidget {
               style: const TextStyle(
                 fontFamily: 'JosefinSans',
                 fontWeight: FontWeight.w900,
-                fontSize: 22.0,
+                fontSize: 15.0,
               )),
           subtitle: Text(
             contactDetails[1] + '\n' + contactDetails[2],
