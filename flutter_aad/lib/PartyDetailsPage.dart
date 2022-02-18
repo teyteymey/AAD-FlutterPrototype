@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_aad/main.dart';
 
+import 'package:add_2_calendar/add_2_calendar.dart';
+
 class PartyDetailsPage extends StatefulWidget {
   List<List<String>> dataParty = [];
 
@@ -114,15 +116,33 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(239, 255, 255, 253),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Color.fromARGB(255, 252, 85, 19),
-          child: const Icon(Icons.house_outlined),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PartiesPage()),
-            );
-          }),
+      floatingActionButton: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Expanded(
+              child: Container(
+            width: MediaQuery.of(context).size.width,
+          )),
+          FloatingActionButton(
+              heroTag: "Share",
+              backgroundColor: Color.fromARGB(255, 252, 85, 19),
+              child: const Icon(Icons.share),
+              onPressed: () {}),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+          ),
+          FloatingActionButton(
+              heroTag: "Home",
+              backgroundColor: Color.fromARGB(255, 252, 85, 19),
+              child: const Icon(Icons.house_outlined),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PartiesPage()),
+                );
+              }),
+        ],
+      ),
       appBar: AppBar(
         title: const Text('Detail page of party!'),
         automaticallyImplyLeading: false,

@@ -33,7 +33,7 @@ class _NewPartyPage extends State<NewPartyPage> {
 
   void randomImage() {
     Random random = new Random();
-    int randomNumber = random.nextInt(3) + 1;
+    int randomNumber = random.nextInt(7) + 1;
     image = '$randomNumber.jpg';
   }
 
