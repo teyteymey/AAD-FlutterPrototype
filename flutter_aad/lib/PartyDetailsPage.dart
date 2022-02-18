@@ -198,25 +198,34 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
       body: SafeArea(
         child: SingleChildScrollView(
             child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Padding(padding: EdgeInsets.all(10)),
-            Text(
-              nameParty,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 116, 78, 28),
-                  fontSize: 30),
-              textAlign: TextAlign.center,
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 130, top: 15, right: 60),
+                  child: Text(
+                    nameParty,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 116, 78, 28),
+                        fontSize: 30),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, bottom: 8),
+                  child: IconButton(
+                    onPressed: () => {},
+                    icon: const Icon(Icons.edit),
+                  ),
+                )
+              ],
+            ),
+            Image(
+              image: AssetImage("images/" + imageParty),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Image(
-                image: AssetImage("images/" + imageParty),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 40),
+              padding: const EdgeInsets.only(left: 40, top: 13),
               child: Text(
                 locationParty + ' on the ' + timeParty,
                 style: const TextStyle(
@@ -226,7 +235,7 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30.0, top: 10, bottom: 20),
+              padding: const EdgeInsets.only(left: 30.0, top: 5),
               child: Text(
                 descriptionParty,
                 style: const TextStyle(
