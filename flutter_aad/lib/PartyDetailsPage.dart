@@ -4,6 +4,7 @@ import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_aad/main.dart';
+import 'package:intl/intl.dart';
 
 import 'package:add_2_calendar/add_2_calendar.dart';
 
@@ -33,7 +34,7 @@ class contactInfo extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        color: Color.fromARGB(225, 137, 255, 239),
+        color: const Color.fromARGB(225, 137, 255, 239),
         child: ListTile(
           isThreeLine: true,
           title: Text(contactDetails[0],
@@ -74,6 +75,31 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
     timeParty = dataParty[0][2];
     imageParty = dataParty[0][3];
     descriptionParty = dataParty[0][4];
+  }
+
+  void shareEvent() {
+    DateFormat dateFormat = DateFormat("dd/MM, HH:mm");
+    DateTime dateTime = dateFormat.parse(timeParty);
+
+    print(timeParty);
+    print(dateTime);
+
+    final Event event = Event(
+      title: nameParty,
+      description: descriptionParty,
+      location: locationParty,
+      //startDate: DateTime(int.parse(date[0])),
+      startDate: dateTime,
+      endDate: DateTime(2023),
+      iosParams: const IOSParams(
+        reminder:
+            const Duration(), // on iOS, you can set alarm notification after your event.
+      ),
+      androidParams: const AndroidParams(
+        emailInvites: [], // on Android, you can add invite emails to your event.
+      ),
+    );
+    Add2Calendar.addEvent2Cal(event);
   }
 
   Future<void> _pickContact() async {
@@ -125,15 +151,17 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
           )),
           FloatingActionButton(
               heroTag: "Share",
-              backgroundColor: Color.fromARGB(255, 252, 85, 19),
+              backgroundColor: const Color.fromARGB(255, 252, 85, 19),
               child: const Icon(Icons.share),
-              onPressed: () {}),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
+              onPressed: () {
+                shareEvent();
+              }),
+          const Padding(
+            padding: EdgeInsets.all(10.0),
           ),
           FloatingActionButton(
               heroTag: "Home",
-              backgroundColor: Color.fromARGB(255, 252, 85, 19),
+              backgroundColor: const Color.fromARGB(255, 252, 85, 19),
               child: const Icon(Icons.house_outlined),
               onPressed: () {
                 Navigator.push(
@@ -203,7 +231,7 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
                   ),
                   IconButton(
                     onPressed: () => {_pickContact()},
-                    icon: Icon(Icons.add),
+                    icon: const Icon(Icons.add),
                   )
                 ],
               ),

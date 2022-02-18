@@ -1,3 +1,4 @@
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'PartyDetailsPage.dart';
@@ -176,6 +177,7 @@ class _AddContactsToParty extends State<AddContactsToParty> {
             //this will make the corresponding list with details of the party and info about the participants
             formatDetailsOfParty();
             AddParty();
+            createEvent();
             //print(finalDetailsParty);
             Navigator.push(
               context,
@@ -189,5 +191,23 @@ class _AddContactsToParty extends State<AddContactsToParty> {
   void AddParty() {
     globals.partyInfo.add(finalDetailsParty);
     print(finalDetailsParty);
+  }
+
+  void createEvent() {
+    final Event event = Event(
+      title: partyDetails[0],
+      description: partyDetails[4],
+      location: partyDetails[1],
+      startDate: DateTime(2022),
+      endDate: DateTime(2023),
+      iosParams: IOSParams(
+        reminder:
+            Duration(), // on iOS, you can set alarm notification after your event.
+      ),
+      androidParams: AndroidParams(
+        emailInvites: [], // on Android, you can add invite emails to your event.
+      ),
+    );
+    Add2Calendar.addEvent2Cal(event);
   }
 }
