@@ -191,7 +191,7 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
               textAlign: TextAlign.center,
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(15.0),
               child: Image(
                 image: AssetImage("images/" + imageParty),
               ),
@@ -199,11 +199,21 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
             Padding(
               padding: const EdgeInsets.only(left: 40),
               child: Text(
-                locationParty + '\n' + timeParty,
+                locationParty + ' on the ' + timeParty,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 116, 78, 28),
-                    fontSize: 15),
+                    fontSize: 14),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 30.0, top: 10, bottom: 20),
+              child: Text(
+                descriptionParty,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: Color.fromARGB(255, 116, 78, 28),
+                    fontSize: 13),
               ),
             ),
             Container(
