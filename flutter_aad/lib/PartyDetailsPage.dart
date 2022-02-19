@@ -3,6 +3,7 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_aad/editDetailsParty.dart';
 import 'package:flutter_aad/main.dart';
 import 'package:intl/intl.dart';
 import 'globals.dart' as globals;
@@ -16,7 +17,7 @@ class PartyDetailsPage extends StatefulWidget {
     dataParty = data;
   }
 
-  _PartyDetailsPage createState() => _PartyDetailsPage(dataParty);
+  _PartyDetailsPage createState() => _PartyDetailsPage();
 }
 
 class contactInfo extends StatelessWidget {
@@ -77,7 +78,7 @@ void deleteContact(List<String> contactDetailsPar) {
 // Page to view details of a party
 class _PartyDetailsPage extends State<PartyDetailsPage> {
   //Attributes of class
-  List<List<String>> dataParty = [];
+  //List<List<String>> dataParty = [];
   Contact _contact = Contact();
 
   String nameParty = '',
@@ -87,8 +88,7 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
       descriptionParty = '';
 
   // Constructor method
-  _PartyDetailsPage(List<List<String>> data) {
-    dataParty = data;
+  _PartyDetailsPage() {
     nameParty = dataParty[0][0];
     locationParty = dataParty[0][1];
     timeParty = dataParty[0][2];
@@ -99,9 +99,6 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
   void shareEvent() {
     DateFormat dateFormat = DateFormat("dd/MM, HH:mm");
     DateTime dateTime = dateFormat.parse(timeParty);
-
-    print(timeParty);
-    print(dateTime);
 
     final Event event = Event(
       title: nameParty,
@@ -199,28 +196,37 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
         child: SingleChildScrollView(
             child: Column(
           children: [
+            Padding(padding: EdgeInsets.only(top: 8)),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 130, top: 15, right: 60),
-                  child: Text(
-                    nameParty,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 116, 78, 28),
-                        fontSize: 30),
-                    textAlign: TextAlign.center,
-                  ),
+                Wrap(
+                  direction: Axis.horizontal,
+                  spacing: 20,
+                  children: [
+                    Text(
+                      nameParty,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 116, 78, 28),
+                          fontSize: 30),
+                      textAlign: TextAlign.center,
+                    ),
+                    IconButton(
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditPartyPage(dataParty)),
+                        )
+                      },
+                      icon: const Icon(Icons.edit),
+                    )
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 8),
-                  child: IconButton(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.edit),
-                  ),
-                )
               ],
             ),
+
             Image(
               image: AssetImage("images/" + imageParty),
             ),

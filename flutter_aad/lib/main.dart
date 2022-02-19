@@ -68,7 +68,6 @@ class Party extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        print(globals.partyInfo);
         Navigator.push(
           context,
           MaterialPageRoute(
