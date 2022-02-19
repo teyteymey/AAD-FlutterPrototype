@@ -100,6 +100,12 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
     DateFormat dateFormat = DateFormat("dd/MM, HH:mm");
     DateTime dateTime = dateFormat.parse(timeParty);
 
+    List<String> emails = [];
+
+    for (int i = 1; i < dataParty.length; i++) {
+      emails.add(dataParty[i][2]); // Where the emails are stored
+    }
+
     final Event event = Event(
       title: nameParty,
       description: descriptionParty,
@@ -111,8 +117,9 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
         reminder:
             const Duration(), // on iOS, you can set alarm notification after your event.
       ),
-      androidParams: const AndroidParams(
-        emailInvites: [], // on Android, you can add invite emails to your event.
+      androidParams: AndroidParams(
+        emailInvites:
+            emails, // on Android, you can add invite emails to your event.
       ),
     );
     Add2Calendar.addEvent2Cal(event);
