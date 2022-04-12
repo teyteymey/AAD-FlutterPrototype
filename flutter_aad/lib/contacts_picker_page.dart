@@ -8,6 +8,8 @@ class ContactPickerPage extends StatefulWidget {
   _ContactPickerPageState createState() => _ContactPickerPageState();
 }
 
+// This class comes from the documentation of the package used 'package:contacts_service/contacts_service.dart'
+// Since it was not very clear how it was used, I took the methods I needed and created my own class.
 class _ContactPickerPageState extends State<ContactPickerPage> {
   Contact _contact = new Contact();
 
@@ -16,6 +18,8 @@ class _ContactPickerPageState extends State<ContactPickerPage> {
     super.initState();
   }
 
+  // allows to pick a contact from the native app. Then it reads the contact information and we can use
+  // it to link it with the party
   Future<void> _pickContact() async {
     try {
       final Contact? contact = await ContactsService.openDeviceContactPicker();
@@ -27,6 +31,8 @@ class _ContactPickerPageState extends State<ContactPickerPage> {
     }
   }
 
+  //Builds the page to pick contacts for a party
+  // it calls the method above, which displays the native app
   @override
   Widget build(BuildContext context) {
     return Scaffold(

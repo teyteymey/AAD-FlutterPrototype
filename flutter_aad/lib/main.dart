@@ -16,6 +16,8 @@ class PartiesPage extends StatefulWidget {
 }
 
 class _PartiesPageState extends State<PartiesPage> {
+  // builds the list of all the parties in the system.
+  // it also has the floating button that helps us add a new party
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -47,6 +49,7 @@ class _PartiesPageState extends State<PartiesPage> {
 }
 
 // Definition of element party
+// in here there is also the builder who contains the details of a party
 class Party extends StatelessWidget {
   //attributes of each party
   String titleParty = 'Default';
@@ -56,6 +59,7 @@ class Party extends StatelessWidget {
   List<List<String>> allPartyDetails = [];
 
   //creator methods with parameters
+  // it sets each attribute
   Party(List<List<String>> list) {
     titleParty = list[0][0];
     locationParty = list[0][1];
@@ -64,6 +68,8 @@ class Party extends StatelessWidget {
     allPartyDetails = list;
   }
 
+  // builder for party details.
+  // when clicked, the details of the party are displayed
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -110,6 +116,7 @@ class Party extends StatelessWidget {
     );
   }
 
+  // allows to delete a party from the data, so it will no longer show
   void deleteParty() {
     globals.partyInfo.remove(allPartyDetails);
   }

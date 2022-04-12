@@ -95,7 +95,7 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
     imageParty = dataParty[0][3];
     descriptionParty = dataParty[0][4];
   }
-
+  // Shares the event to the native app using the package 'package:add_2_calendar/add_2_calendar.dart'
   void shareEvent() {
     DateFormat dateFormat = DateFormat("dd/MM, HH:mm");
     DateTime dateTime = dateFormat.parse(timeParty);
@@ -125,6 +125,7 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
     Add2Calendar.addEvent2Cal(event);
   }
 
+  // Allows us to pick a contact from the native app using the package 'package:contacts_service/contacts_service.dart'
   Future<void> _pickContact() async {
     try {
       final Contact? contact = await ContactsService.openDeviceContactPicker();
@@ -161,6 +162,8 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
     }
   }
 
+  // builds the details of the party page
+  // it also displays all the contacts invited to the party
   @override
   Widget build(BuildContext context) {
     return Scaffold(

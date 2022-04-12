@@ -20,12 +20,18 @@ class AddContactsToParty extends StatefulWidget {
   }
 }
 
+// Is the method wich builds a contact information widget
 class ContactContainer extends StatelessWidget {
+  // attributes
   String name = 'def';
   String email = '';
   String phone = '';
   Contact contactDetails = Contact();
 
+  // Creator method of the contact container
+  /*
+  We check if the email and the phone exist and then build a card with the information needed
+  */
   ContactContainer(Contact contactDetails) {
     contactDetails = contactDetails;
     name = contactDetails.displayName!;
@@ -42,6 +48,9 @@ class ContactContainer extends StatelessWidget {
       phone = 'There are no phones registered';
     }
   }
+
+  // building method for the contact card details.
+  // Shows the name, the email and the phone.
 
   @override
   Widget build(BuildContext context) {
@@ -68,20 +77,24 @@ class ContactContainer extends StatelessWidget {
   }
 }
 
-// Page to view details of a party
+// Class to add contacts to a party
 class _AddContactsToParty extends State<AddContactsToParty> {
   // Contact selected
   Contact _contact = new Contact();
-
+  //attributes
   List<Contact> contacts = [];
   List<String> partyDetails = [];
   List<List<String>> finalDetailsParty = [];
-
+  //constructor method that sets the parameter into the atribute of the object
   _AddContactsToParty(List<String> data) {
-    print(data);
     partyDetails = data;
   }
 
+/**
+ * We build the details of the party to the finalDetailsParty List, which contains the party details in the first position
+ * (like name, location...) and
+ * then the info of each participant.
+ */
   void formatDetailsOfParty() {
     List<String> temp = [];
     String email, phone, displayName;
@@ -115,6 +128,8 @@ class _AddContactsToParty extends State<AddContactsToParty> {
     }
   }
 
+//Opens a new view to pick a contact from the native app for contacts
+//when selected a contact, we add it to the list of contacts coming to the party
   Future<void> _pickContact() async {
     try {
       final Contact? contact = await ContactsService.openDeviceContactPicker();
@@ -127,6 +142,9 @@ class _AddContactsToParty extends State<AddContactsToParty> {
     }
   }
 
+/**
+ * Builder method for adding contacts to the party.
+ */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -188,11 +206,13 @@ class _AddContactsToParty extends State<AddContactsToParty> {
     );
   }
 
+//this will add the party with all the details to the global variables. this is needed to show the party after in the home page
   void AddParty() {
     globals.partyInfo.add(finalDetailsParty);
     print(finalDetailsParty);
   }
 
+//creates an event in native calendar- it adds the party details we had.
   void createEvent() {
     final Event event = Event(
       title: partyDetails[0],

@@ -2,6 +2,9 @@ library my_prj.globals;
 
 import 'package:contacts_service/contacts_service.dart';
 
+// Has all the parties.
+// When restarting the app, it loses all the session data and stays with this
+// default information.
 List<List<List<String>>> partyInfo = [
   [
     [

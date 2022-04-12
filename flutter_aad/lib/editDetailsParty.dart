@@ -36,13 +36,16 @@ class _EditPartyPage extends State<EditPartyPage> {
   List<String> partyInfo = [];
 
   final _formKey = GlobalKey<FormState>();
-
+  /**
+   * Chooses a random image for the party from the assets available
+   */
   void randomImage() {
     Random random = new Random();
     int randomNumber = random.nextInt(7) + 1;
     image = '$randomNumber.jpg';
   }
 
+  // Displays the form field for name and validates that the input with the validator
   Widget formName() {
     return TextFormField(
       initialValue: dataParty[0]
@@ -73,6 +76,7 @@ class _EditPartyPage extends State<EditPartyPage> {
     );
   }
 
+// Displays the form field for location and validates that the input with the validator
   Widget formLocation() {
     return TextFormField(
       initialValue: dataParty[0]
@@ -100,6 +104,7 @@ class _EditPartyPage extends State<EditPartyPage> {
     );
   }
 
+// Displays the time picker by using the package 'package:flutter_datetime_picker/flutter_datetime_picker.dart'
   void _selectTime() async {
     final TimeOfDay? newTime = await showTimePicker(
       context: context,
@@ -113,6 +118,7 @@ class _EditPartyPage extends State<EditPartyPage> {
     }
   }
 
+// Displays the date picker by using the package 'package:flutter_datetime_picker/flutter_datetime_picker.dart'
   void _selectDate() async {
     final DateTime? newDate = await showDatePicker(
       context: context,
@@ -129,6 +135,8 @@ class _EditPartyPage extends State<EditPartyPage> {
     }
   }
 
+  // it is the form for the time.
+  // it is a button that when clicked calls the function called _selectTime()
   Widget formTime() {
     return TextButton.icon(
         icon: const Icon(
@@ -150,6 +158,8 @@ class _EditPartyPage extends State<EditPartyPage> {
         ));
   }
 
+// it is the form for the time.
+  // it is a button that when clicked calls the function called _selectDate()
   Widget formDate() {
     return TextButton.icon(
         icon: const Icon(
@@ -171,6 +181,8 @@ class _EditPartyPage extends State<EditPartyPage> {
         ));
   }
 
+  // it is unused, but in case we wanted more material feel, we can check which system is running and display a different
+  // material style
   Widget formTimeIOS() {
     return TextButton.icon(
         icon: const Icon(
@@ -213,6 +225,7 @@ class _EditPartyPage extends State<EditPartyPage> {
         ));
   }
 
+  // displays the form for the description: user needs to enter the description of the party
   Widget formDescription() {
     return TextFormField(
       initialValue: dataParty[0]
@@ -230,6 +243,7 @@ class _EditPartyPage extends State<EditPartyPage> {
     );
   }
 
+  // builds the page with all the methods above, which set the attributes for the party
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -298,6 +312,7 @@ class _EditPartyPage extends State<EditPartyPage> {
     );
   }
 
+  // Serves to edit the details of the party by removing the info from the party and then adding the new party with the changed details
   void changeInfo() {
     print('globals ${globals.partyInfo}');
     globals.partyInfo
