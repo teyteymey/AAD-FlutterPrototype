@@ -3,7 +3,7 @@ import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'page_party_details.dart';
 import 'page_contacts_picker.dart';
-import 'globals.dart' as globals;
+import '../globals.dart' as globals;
 
 class AddContactsToParty extends StatefulWidget {
   //const AddContactsToParty({Key? key}) : super(key: key);

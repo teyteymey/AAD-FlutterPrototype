@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_aad/page_party_details.dart';
+import 'package:flutter_aad/pages/page_party_details.dart';
 import 'globals.dart' as globals;
 //import 'dart:html';
 
-import 'page_new_party.dart';
+import 'pages/page_new_party.dart';
 
 void main() {
   runApp(

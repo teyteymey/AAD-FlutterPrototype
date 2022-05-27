@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_aad/page_add_contacts_to_party.dart';
+import 'package:flutter_aad/pages/page_add_contacts_to_party.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
-import 'form_fields.dart';
+import '../widgets_form_fields.dart';
 
 class NewPartyPage extends StatefulWidget {
   const NewPartyPage({Key? key}) : super(key: key);

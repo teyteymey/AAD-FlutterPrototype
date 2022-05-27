@@ -3,11 +3,11 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_aad/page_edit_party_details.dart';
+import 'package:flutter_aad/pages/page_edit_party_details.dart';
 import 'package:flutter_aad/main.dart';
 import 'package:intl/intl.dart';
-import 'contact_info.dart';
-import 'globals.dart' as globals;
+import '../class_contact_info.dart';
+import '../globals.dart' as globals;
 
 import 'package:add_2_calendar/add_2_calendar.dart';
 

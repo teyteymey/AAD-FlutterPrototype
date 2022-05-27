@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_aad/page_add_contacts_to_party.dart';
-import 'package:flutter_aad/page_new_party.dart';
+import 'package:flutter_aad/pages/page_add_contacts_to_party.dart';
+import 'package:flutter_aad/pages/page_new_party.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 // Displays the form field for name and validates that the input with the validator
