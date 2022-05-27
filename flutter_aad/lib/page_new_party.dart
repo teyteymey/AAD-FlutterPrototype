@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_aad/page_add_contacts_to_party.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'main.dart';
+
+import 'form_fields.dart';
 
 class NewPartyPage extends StatefulWidget {
   const NewPartyPage({Key? key}) : super(key: key);
@@ -15,17 +15,23 @@ class NewPartyPage extends StatefulWidget {
   }
 }
 
+//Class to pass primitives by reference
+class PrimitiveWrapper {
+  var value;
+  PrimitiveWrapper(this.value);
+}
+
 // Page to view details of a party
 class _NewPartyPage extends State<NewPartyPage> {
   // Attributes of parties
-  String nameParty = 'default';
+  var nameParty = PrimitiveWrapper('default');
   String dateParty = 'default';
-  String locationParty = 'default';
-  String descriptionParty = 'default';
+  var locationParty = PrimitiveWrapper('default');
+  var descriptionParty = PrimitiveWrapper('default');
   String timeParty = 'default';
   String image = '1.jpg';
   TimeOfDay _time = const TimeOfDay(hour: 20, minute: 15);
-  DateTime _date = new DateTime(2022);
+  DateTime _date = DateTime(2022);
 
   List<String> partyInfo = [];
 
@@ -35,64 +41,9 @@ class _NewPartyPage extends State<NewPartyPage> {
    * Chooses a random image for the party from the assets available
    */
   void randomImage() {
-    Random random = new Random();
+    Random random = Random();
     int randomNumber = random.nextInt(7) + 1;
     image = '$randomNumber.jpg';
-  }
-
-  // Displays the form field for name and validates that the input with the validator
-  Widget formName() {
-    return TextFormField(
-      decoration: const InputDecoration(
-        icon: Icon(
-          Icons.attractions_outlined,
-          size: 25,
-        ),
-        focusColor: Colors.orange,
-        labelText: "Name",
-        labelStyle: TextStyle(
-          color: Color.fromARGB(255, 252, 85, 19),
-        ),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 252, 85, 19)),
-        ),
-      ),
-      onSaved: (value) {
-        nameParty = value!;
-      },
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter some text';
-        }
-        return null;
-      },
-    );
-  }
-
-// Displays the form field for location and validates that the input with the validator
-  Widget formLocation() {
-    return TextFormField(
-      decoration: const InputDecoration(
-        icon: Icon(Icons.add_location_alt_outlined),
-        focusColor: Colors.orange,
-        labelText: "Location",
-        labelStyle: TextStyle(
-          color: Color.fromARGB(255, 252, 85, 19),
-        ),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 252, 85, 19)),
-        ),
-      ),
-      onSaved: (value) {
-        locationParty = value!;
-      },
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter a location';
-        }
-        return null;
-      },
-    );
   }
 
 // Displays the time picker by using the package 'package:flutter_datetime_picker/flutter_datetime_picker.dart'
@@ -127,7 +78,7 @@ class _NewPartyPage extends State<NewPartyPage> {
   }
 
   // it is the form for the time.
-  // it is a button that when clicked calls the function called _selectTime()
+// it is a button that when clicked calls the function called _selectTime()
   Widget formTime() {
     return TextButton.icon(
         icon: const Icon(
@@ -149,8 +100,8 @@ class _NewPartyPage extends State<NewPartyPage> {
         ));
   }
 
-  // it is the form for the time.
-  // it is a button that when clicked calls the function called _selectDate()
+// it is the form for the time.
+// it is a button that when clicked calls the function called _selectDate()
   Widget formDate() {
     return TextButton.icon(
         icon: const Icon(
@@ -170,66 +121,6 @@ class _NewPartyPage extends State<NewPartyPage> {
           'Choose a date',
           style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
         ));
-  }
-
-  // it is unused, but in case we wanted more material feel, we can check which system is running and display a different
-  // material style
-  Widget formTimeIOS() {
-    return TextButton.icon(
-        icon: const Icon(
-          Icons.add_alarm,
-          size: 25,
-          color: Colors.white,
-        ),
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.resolveWith(
-                (state) => const Color.fromARGB(255, 252, 85, 19))),
-        onPressed: () {
-          DatePicker.showDateTimePicker(context, showTitleActions: true,
-              onChanged: (date) {
-            print('change $date in time zone ' +
-                date.timeZoneOffset.inHours.toString());
-          }, onConfirm: (date) {
-            int helper = 0;
-            dateParty = '';
-            helper = date.day;
-            dateParty += "$helper";
-            dateParty += '/';
-            helper = date.month;
-            dateParty += "$helper";
-            dateParty += ', ';
-            helper = date.hour;
-            dateParty += "$helper";
-            dateParty += ':';
-            helper = date.minute;
-            if (helper <= 9)
-              dateParty += "0$helper";
-            else
-              dateParty += "$helper";
-            dateParty += 'h';
-            print('confirm $dateParty');
-          }, currentTime: DateTime(2022, 2, 20, 16, 00, 00));
-        },
-        label: const Text(
-          'Choose a date and time',
-          style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
-        ));
-  }
-
-  // displays the form for the description: user needs to enter the description of the party
-  Widget formDescription() {
-    return TextFormField(
-      decoration: const InputDecoration(
-        labelText: 'Description',
-        border: OutlineInputBorder(),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 252, 85, 19)),
-        ),
-      ),
-      onSaved: (value) {
-        descriptionParty = value!;
-      },
-    );
   }
 
   // builds the page with all the methods above, which set the attributes for the party
@@ -253,11 +144,11 @@ class _NewPartyPage extends State<NewPartyPage> {
                 Container(
                   height: 40,
                 ),
-                formName(),
+                formName(nameParty),
                 Container(
                   height: 25,
                 ),
-                formLocation(),
+                formLocation(locationParty),
                 Container(
                   height: 40,
                 ),
@@ -269,7 +160,7 @@ class _NewPartyPage extends State<NewPartyPage> {
                 Container(
                   height: 50,
                 ),
-                formDescription(),
+                formDescription(descriptionParty),
               ],
             ),
           ),
@@ -285,11 +176,11 @@ class _NewPartyPage extends State<NewPartyPage> {
                   },
                 randomImage(),
                 partyInfo.addAll([
-                  nameParty,
-                  locationParty,
+                  nameParty.value,
+                  locationParty.value,
                   dateParty + ', ' + timeParty,
                   image,
-                  descriptionParty,
+                  descriptionParty.value,
                 ]),
                 Navigator.push(
                   context,
