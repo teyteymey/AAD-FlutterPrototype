@@ -1,8 +1,8 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
-import 'PartyDetailsPage.dart';
-import 'contacts_picker_page.dart';
+import 'page_party_details.dart';
+import 'page_contacts_picker.dart';
 import 'globals.dart' as globals;
 
 class AddContactsToParty extends StatefulWidget {

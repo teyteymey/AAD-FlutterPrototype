@@ -3,7 +3,7 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_aad/editDetailsParty.dart';
+import 'package:flutter_aad/page_edit_party_details.dart';
 import 'package:flutter_aad/main.dart';
 import 'package:intl/intl.dart';
 import 'globals.dart' as globals;

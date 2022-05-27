@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_aad/AddContactsToParty.dart';
+import 'package:flutter_aad/page_add_contacts_to_party.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'main.dart';
 
