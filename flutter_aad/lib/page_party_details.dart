@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_aad/page_edit_party_details.dart';
 import 'package:flutter_aad/main.dart';
 import 'package:intl/intl.dart';
+import 'contact_info.dart';
 import 'globals.dart' as globals;
 
 import 'package:add_2_calendar/add_2_calendar.dart';
@@ -18,61 +19,6 @@ class PartyDetailsPage extends StatefulWidget {
   }
 
   _PartyDetailsPage createState() => _PartyDetailsPage();
-}
-
-class contactInfo extends StatelessWidget {
-  List<String> contactDetails = [];
-
-  contactInfo(List<String> contactDetailsPar) {
-    contactDetails = contactDetailsPar;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 90,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        color: const Color.fromARGB(225, 137, 255, 239),
-        child: ListTile(
-          trailing: IconButton(
-            icon: Icon(Icons.remove_circle_outline),
-            onPressed: () {
-              deleteContact(contactDetails);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => PartyDetailsPage(dataParty)),
-              );
-            },
-          ),
-          isThreeLine: true,
-          title: Text(contactDetails[0],
-              style: const TextStyle(
-                fontFamily: 'JosefinSans',
-                fontWeight: FontWeight.w900,
-                fontSize: 17.0,
-              )),
-          subtitle: Text(
-            contactDetails[1] + '\n' + contactDetails[2],
-            style:
-                TextStyle(color: Colors.black.withOpacity(0.6), fontSize: 13),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-void deleteContact(List<String> contactDetailsPar) {
-  globals.partyInfo
-      .remove(dataParty); // We remove the whole info of the party in globals
-  dataParty.remove(contactDetailsPar); // We edit the party details
-  globals.partyInfo
-      .add(dataParty); //We add again the party with the participants updated
 }
 
 // Page to view details of a party
@@ -292,7 +238,7 @@ class _PartyDetailsPage extends State<PartyDetailsPage> {
             ),
             //add los contacts
             for (int i = 1; i < dataParty.length; i++)
-              contactInfo(dataParty.elementAt(i))
+              contactInfo(dataParty.elementAt(i), dataParty)
           ],
         )),
       ),
